@@ -11,6 +11,7 @@ import {
 	SeriesPartialOptionsMap,
 	SeriesType,
 } from '../model/series-options';
+import { TimePoint } from '../model/time-data';
 
 import { IPriceScaleApiProvider } from './chart-api';
 import { DataUpdatesConsumer, SeriesDataItemTypeMap, Time } from './data-consumer';
@@ -81,7 +82,7 @@ export class SeriesApi<TSeriesType extends SeriesType> implements ISeriesApi<TSe
 	}
 
 	public setMarkers(data: SeriesMarker<Time>[]): void {
-		const convertedMarkers = data.map((marker: SeriesMarker<Time>) => ({
+		const convertedMarkers = data.map<SeriesMarker<TimePoint>>((marker: SeriesMarker<Time>) => ({
 			...marker,
 			time: convertTime(marker.time),
 		}));
